@@ -4,29 +4,67 @@ import (
 	"testing"
 )
 
-func TestParseFlags(t *testing.T) {
-	args := []string{
-		"--length=20",
-		"--digits",
-		"--symbols",
-		"--uppercase",
-	}
+func TestParseFlags_ParsesLength(t *testing.T) {
+	// Arrange
+	args := []string{"--length=20"}
 
+	// Act
 	config, err := parseFlags(args)
+
+	// Assert
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
+	expected := 20
+	if config.Length != expected {
+		t.Errorf("expected length %d, got %d", expected, config.Length)
+	}
+}
 
-	if config.Length != 20 {
-		t.Errorf("expected length 20, got %d", config.Length)
+func TestParseFlags_SetsDigitsToTrue(t *testing.T) {
+	// Arrange
+	args := []string{"--digits"}
+
+	// Act
+	config, err := parseFlags(args)
+
+	// Assert
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
 	}
 	if !config.Digits {
-		t.Errorf("expected digits to be true")
+		t.Error("expected digits to be true")
+	}
+}
+
+func TestParseFlags_SetsSymbolsToTrue(t *testing.T) {
+	// Arrange
+	args := []string{"--symbols"}
+
+	// Act
+	config, err := parseFlags(args)
+
+	// Assert
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
 	}
 	if !config.Symbols {
-		t.Errorf("expected symbols to be true")
+		t.Error("expected symbols to be true")
+	}
+}
+
+func TestParseFlags_SetsUppercaseToTrue(t *testing.T) {
+	// Arrange
+	args := []string{"--uppercase"}
+
+	// Act
+	config, err := parseFlags(args)
+
+	// Assert
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
 	}
 	if !config.Uppercase {
-		t.Errorf("expected uppercase to be true")
+		t.Error("expected uppercase to be true")
 	}
 }

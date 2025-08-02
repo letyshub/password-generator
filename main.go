@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"password-generator/config"
+	"password-generator/generator"
 )
 
 func parseFlags(args []string) (config.Config, error) {
@@ -34,4 +35,12 @@ func main() {
 		fmt.Println("Error parsing flags:", err)
 		os.Exit(1)
 	}
+
+	password, err := generator.GeneratePassword(config)
+	if err != nil {
+		fmt.Println("Error generating password:", err)
+		os.Exit(1)
+	}
+
+	fmt.Println(password)
 }
