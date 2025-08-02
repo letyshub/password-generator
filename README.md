@@ -1,4 +1,5 @@
 # password-generator
+![Go CI](https://github.com/letyshub/password-generator/actions/workflows/ci.yml/badge.svg)
 
 A simple and secure command-line tool written in Go for generating random passwords. Customizable, fast, and easy to use.
 
